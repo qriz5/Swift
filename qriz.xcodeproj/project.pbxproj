@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		63705E302BFC319500715F88 /* qrizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E2F2BFC319500715F88 /* qrizApp.swift */; };
-		63705E322BFC319500715F88 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E312BFC319500715F88 /* ContentView.swift */; };
+		63705E322BFC319500715F88 /* Qriz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E312BFC319500715F88 /* Qriz.swift */; };
 		63705E342BFC319700715F88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63705E332BFC319700715F88 /* Assets.xcassets */; };
 		63705E372BFC319700715F88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63705E362BFC319700715F88 /* Preview Assets.xcassets */; };
 		63705E412BFC319700715F88 /* qrizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E402BFC319700715F88 /* qrizTests.swift */; };
 		63705E4B2BFC319700715F88 /* qrizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E4A2BFC319700715F88 /* qrizUITests.swift */; };
 		63705E4D2BFC319700715F88 /* qrizUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E4C2BFC319700715F88 /* qrizUITestsLaunchTests.swift */; };
+		63705E5B2BFC94E600715F88 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63705E5A2BFC94E600715F88 /* Color.xcassets */; };
+		63705E5D2BFC94FA00715F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63705E5C2BFC94FA00715F88 /* LaunchScreen.storyboard */; };
+		63705E652BFD87EC00715F88 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E642BFD87EC00715F88 /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,7 @@
 /* Begin PBXFileReference section */
 		63705E2C2BFC319500715F88 /* qriz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qriz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63705E2F2BFC319500715F88 /* qrizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qrizApp.swift; sourceTree = "<group>"; };
-		63705E312BFC319500715F88 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		63705E312BFC319500715F88 /* Qriz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qriz.swift; sourceTree = "<group>"; };
 		63705E332BFC319700715F88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63705E362BFC319700715F88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		63705E3C2BFC319700715F88 /* qrizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qrizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +47,9 @@
 		63705E462BFC319700715F88 /* qrizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qrizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63705E4A2BFC319700715F88 /* qrizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qrizUITests.swift; sourceTree = "<group>"; };
 		63705E4C2BFC319700715F88 /* qrizUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qrizUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		63705E5A2BFC94E600715F88 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		63705E5C2BFC94FA00715F88 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		63705E642BFD87EC00715F88 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +100,15 @@
 		63705E2E2BFC319500715F88 /* qriz */ = {
 			isa = PBXGroup;
 			children = (
+				63705E5F2BFD80B400715F88 /* View */,
+				63705E5E2BFD80AB00715F88 /* Model */,
+				63705E612BFD80D900715F88 /* Repository */,
+				63705E632BFD810700715F88 /* General */,
+				63705E602BFD80C800715F88 /* Service */,
+				63705E622BFD80FC00715F88 /* Extension */,
 				63705E2F2BFC319500715F88 /* qrizApp.swift */,
-				63705E312BFC319500715F88 /* ContentView.swift */,
-				63705E332BFC319700715F88 /* Assets.xcassets */,
+				63705E312BFC319500715F88 /* Qriz.swift */,
+				63705E592BFC946900715F88 /* Resource */,
 				63705E352BFC319700715F88 /* Preview Content */,
 			);
 			path = qriz;
@@ -125,6 +137,107 @@
 				63705E4C2BFC319700715F88 /* qrizUITestsLaunchTests.swift */,
 			);
 			path = qrizUITests;
+			sourceTree = "<group>";
+		};
+		63705E592BFC946900715F88 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63705E332BFC319700715F88 /* Assets.xcassets */,
+				63705E5A2BFC94E600715F88 /* Color.xcassets */,
+				63705E5C2BFC94FA00715F88 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		63705E5E2BFD80AB00715F88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63705E672BFD881900715F88 /* Onboarding */,
+				63705E682BFD882D00715F88 /* Home */,
+				63705E6B2BFD88D200715F88 /* MyPage */,
+				63705E662BFD881000715F88 /* Login */,
+				63705E6A2BFD888A00715F88 /* SignUp */,
+				63705E692BFD885800715F88 /* FindIdPw */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63705E5F2BFD80B400715F88 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63705E602BFD80C800715F88 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		63705E612BFD80D900715F88 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		63705E622BFD80FC00715F88 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				63705E642BFD87EC00715F88 /* Color+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		63705E632BFD810700715F88 /* General */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		63705E662BFD881000715F88 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		63705E672BFD881900715F88 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		63705E682BFD882D00715F88 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		63705E692BFD885800715F88 /* FindIdPw */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FindIdPw;
+			sourceTree = "<group>";
+		};
+		63705E6A2BFD888A00715F88 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		63705E6B2BFD88D200715F88 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +345,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				63705E372BFC319700715F88 /* Preview Assets.xcassets in Resources */,
+				63705E5D2BFC94FA00715F88 /* LaunchScreen.storyboard in Resources */,
 				63705E342BFC319700715F88 /* Assets.xcassets in Resources */,
+				63705E5B2BFC94E600715F88 /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +372,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63705E322BFC319500715F88 /* ContentView.swift in Sources */,
+				63705E322BFC319500715F88 /* Qriz.swift in Sources */,
+				63705E652BFD87EC00715F88 /* Color+Extension.swift in Sources */,
 				63705E302BFC319500715F88 /* qrizApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +542,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -454,7 +570,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
