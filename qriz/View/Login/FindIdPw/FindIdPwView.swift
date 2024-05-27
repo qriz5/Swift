@@ -11,8 +11,8 @@ import SwiftUI
 struct FindIdPwView: View {
     @StateObject private var findIdPwViewModel = FindIdPwViewModel()
     @EnvironmentObject var pathModel: PathModel
-        @State private var selectedSegment = 0
-        let segments = ["아이디 찾기", "비밀번호 찾기"]
+    @State private var selectedSegment = 0
+    let segments = ["아이디 찾기", "비밀번호 찾기"]
 
     var body: some View {
         NavigationStack {
@@ -36,7 +36,7 @@ struct FindIdPwView: View {
                 
                 Spacer()
                 
-                FindButtonView(findIdPwViewModel: findIdPwViewModel)
+                FindButtonView(findIdPwViewModel: findIdPwViewModel, selectedSegment: $selectedSegment)
             }
         }
     }
@@ -146,6 +146,7 @@ struct FindPwView: View {
 // MARK: - 찾기 버튼 뷰
 struct FindButtonView: View {
     @ObservedObject var findIdPwViewModel: FindIdPwViewModel
+    @Binding var selectedSegment: Int
     
     var body: some View {
         
@@ -154,7 +155,7 @@ struct FindButtonView: View {
         Button(action: {
             print("찾기 버튼 클릭됨")
         }) {
-            Text(findIdPwViewModel.selectedTab == .findId ? "아이디 찾기" : "비밀번호 찾기")
+            Text(selectedSegment == 0 ? "아이디 찾기" : "비밀번호 찾기")
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
