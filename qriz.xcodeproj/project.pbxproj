@@ -17,6 +17,18 @@
 		63705E5B2BFC94E600715F88 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63705E5A2BFC94E600715F88 /* Color.xcassets */; };
 		63705E5D2BFC94FA00715F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63705E5C2BFC94FA00715F88 /* LaunchScreen.storyboard */; };
 		63705E652BFD87EC00715F88 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E642BFD87EC00715F88 /* Color+Extension.swift */; };
+		63705E6F2BFD924500715F88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E6E2BFD924500715F88 /* LoginView.swift */; };
+		63705E712BFD92BE00715F88 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E702BFD92BE00715F88 /* LoginViewModel.swift */; };
+		63705E772BFD940B00715F88 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E762BFD940B00715F88 /* CustomNavigationBar.swift */; };
+		63705E792BFDA66400715F88 /* NavigationTitleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E782BFDA66400715F88 /* NavigationTitleType.swift */; };
+		63705E7C2BFEECBD00715F88 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E7B2BFEECBC00715F88 /* Path.swift */; };
+		63705E7E2BFEECCA00715F88 /* PathType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E7D2BFEECCA00715F88 /* PathType.swift */; };
+		63705E812BFF14CD00715F88 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E802BFF14CD00715F88 /* SignUpView.swift */; };
+		63705E832BFF14DD00715F88 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E822BFF14DD00715F88 /* SignUpViewModel.swift */; };
+		63705E852BFF14F000715F88 /* FindIdPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E842BFF14F000715F88 /* FindIdPwViewModel.swift */; };
+		63705E872BFF150300715F88 /* FindIdPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E862BFF150300715F88 /* FindIdPwView.swift */; };
+		63705E892C04416E00715F88 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E882C04416E00715F88 /* HomeView.swift */; };
+		63705E8C2C0446B200715F88 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705E8B2C0446B200715F88 /* UnderlineSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +62,18 @@
 		63705E5A2BFC94E600715F88 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		63705E5C2BFC94FA00715F88 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63705E642BFD87EC00715F88 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		63705E6E2BFD924500715F88 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		63705E702BFD92BE00715F88 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		63705E762BFD940B00715F88 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		63705E782BFDA66400715F88 /* NavigationTitleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleType.swift; sourceTree = "<group>"; };
+		63705E7B2BFEECBC00715F88 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		63705E7D2BFEECCA00715F88 /* PathType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathType.swift; sourceTree = "<group>"; };
+		63705E802BFF14CD00715F88 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		63705E822BFF14DD00715F88 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		63705E842BFF14F000715F88 /* FindIdPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPwViewModel.swift; sourceTree = "<group>"; };
+		63705E862BFF150300715F88 /* FindIdPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPwView.swift; sourceTree = "<group>"; };
+		63705E882C04416E00715F88 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		63705E8B2C0446B200715F88 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +126,7 @@
 			children = (
 				63705E5F2BFD80B400715F88 /* View */,
 				63705E5E2BFD80AB00715F88 /* Model */,
+				63705E722BFD937800715F88 /* Component */,
 				63705E612BFD80D900715F88 /* Repository */,
 				63705E632BFD810700715F88 /* General */,
 				63705E602BFD80C800715F88 /* Service */,
@@ -152,12 +177,7 @@
 		63705E5E2BFD80AB00715F88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63705E672BFD881900715F88 /* Onboarding */,
-				63705E682BFD882D00715F88 /* Home */,
-				63705E6B2BFD88D200715F88 /* MyPage */,
-				63705E662BFD881000715F88 /* Login */,
-				63705E6A2BFD888A00715F88 /* SignUp */,
-				63705E692BFD885800715F88 /* FindIdPw */,
+				63705E7A2BFEEBC600715F88 /* Path */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +185,13 @@
 		63705E5F2BFD80B400715F88 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				63705E7F2BFEF76D00715F88 /* Authentication */,
+				63705E662BFD881000715F88 /* Login */,
+				63705E682BFD882D00715F88 /* Home */,
+				63705E6D2BFD91B500715F88 /* Text */,
+				63705E6C2BFD910C00715F88 /* Exam */,
+				63705E672BFD881900715F88 /* Onboarding */,
+				63705E6B2BFD88D200715F88 /* MyPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +228,10 @@
 		63705E662BFD881000715F88 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				63705E6A2BFD888A00715F88 /* SignUp */,
+				63705E692BFD885800715F88 /* FindIdPw */,
+				63705E6E2BFD924500715F88 /* LoginView.swift */,
+				63705E702BFD92BE00715F88 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -215,6 +246,7 @@
 		63705E682BFD882D00715F88 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				63705E882C04416E00715F88 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -222,6 +254,8 @@
 		63705E692BFD885800715F88 /* FindIdPw */ = {
 			isa = PBXGroup;
 			children = (
+				63705E862BFF150300715F88 /* FindIdPwView.swift */,
+				63705E842BFF14F000715F88 /* FindIdPwViewModel.swift */,
 			);
 			path = FindIdPw;
 			sourceTree = "<group>";
@@ -229,6 +263,8 @@
 		63705E6A2BFD888A00715F88 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				63705E802BFF14CD00715F88 /* SignUpView.swift */,
+				63705E822BFF14DD00715F88 /* SignUpViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -238,6 +274,62 @@
 			children = (
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		63705E6C2BFD910C00715F88 /* Exam */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Exam;
+			sourceTree = "<group>";
+		};
+		63705E6D2BFD91B500715F88 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		63705E722BFD937800715F88 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				63705E8A2C04468A00715F88 /* UnderlineSegmentedControl */,
+				63705E732BFD93A300715F88 /* NavigationView */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		63705E732BFD93A300715F88 /* NavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				63705E762BFD940B00715F88 /* CustomNavigationBar.swift */,
+				63705E782BFDA66400715F88 /* NavigationTitleType.swift */,
+			);
+			path = NavigationView;
+			sourceTree = "<group>";
+		};
+		63705E7A2BFEEBC600715F88 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				63705E7B2BFEECBC00715F88 /* Path.swift */,
+				63705E7D2BFEECCA00715F88 /* PathType.swift */,
+			);
+			path = Path;
+			sourceTree = "<group>";
+		};
+		63705E7F2BFEF76D00715F88 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		63705E8A2C04468A00715F88 /* UnderlineSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				63705E8B2C0446B200715F88 /* UnderlineSegmentedControl.swift */,
+			);
+			path = UnderlineSegmentedControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,9 +464,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63705E792BFDA66400715F88 /* NavigationTitleType.swift in Sources */,
+				63705E8C2C0446B200715F88 /* UnderlineSegmentedControl.swift in Sources */,
+				63705E892C04416E00715F88 /* HomeView.swift in Sources */,
+				63705E772BFD940B00715F88 /* CustomNavigationBar.swift in Sources */,
+				63705E7E2BFEECCA00715F88 /* PathType.swift in Sources */,
+				63705E7C2BFEECBD00715F88 /* Path.swift in Sources */,
 				63705E322BFC319500715F88 /* Qriz.swift in Sources */,
+				63705E872BFF150300715F88 /* FindIdPwView.swift in Sources */,
 				63705E652BFD87EC00715F88 /* Color+Extension.swift in Sources */,
+				63705E812BFF14CD00715F88 /* SignUpView.swift in Sources */,
+				63705E6F2BFD924500715F88 /* LoginView.swift in Sources */,
+				63705E712BFD92BE00715F88 /* LoginViewModel.swift in Sources */,
+				63705E832BFF14DD00715F88 /* SignUpViewModel.swift in Sources */,
 				63705E302BFC319500715F88 /* qrizApp.swift in Sources */,
+				63705E852BFF14F000715F88 /* FindIdPwViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
