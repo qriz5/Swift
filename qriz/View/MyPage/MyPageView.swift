@@ -123,19 +123,13 @@ struct MyPageExamView: View {
 
 // MARK: - 고객 센터 리스트 뷰
 struct MyPageServiceView: View {
-    let services = [
-        "FAQ",
-        "서비스 이용약관",
-        "개인정보처리 방침",
-        "버전정보",
-        "공지사항"
-    ]
+    @StateObject private var myPageViewModel = MyPageViewModel()
     
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("고객 센터").font(.system(size: 16))) {
-                    ForEach(services, id: \.self) { service in
+                    ForEach(myPageViewModel.services, id: \.self) { service in
                         NavigationLink(destination: DetailView(title: service)) {
                             Text(service)
                                 .font(.system(size: 16))
