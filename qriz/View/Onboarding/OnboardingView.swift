@@ -13,7 +13,7 @@ struct OnboardingView: View {
             
             Spacer().frame(height: 100)
             
-            TitleView()
+            OnboardingTitleView()
             
             Spacer().frame(height: 25)
             
@@ -29,19 +29,32 @@ struct OnboardingView: View {
 
     }
 }
+
 // MARK: -OnboardingView 타이틀 뷰
-private struct TitleView: View {
+private struct OnboardingTitleView: View {
     @EnvironmentObject private var onboardingViewModel: OnboardingViewModel
     
-    fileprivate var body: some View {
+    var body: some View {
         HStack {
-                Text("전혀 모르는 개념을 \n 체크해 주세요!")
-                Spacer()
-                }
-        .font(.system(size: 30, weight: .bold))
-        .padding(.leading, 20)
+            VStack(alignment: .leading, spacing: 5) {
+                Text("아는 개념을 체크해주세요!")
+                    .foregroundColor(.black)
+                    .font(.system(size: 25, weight: .bold))
+                Spacer().frame(height: 5)
+                Text("체크하신 결과를 토대로")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 16))
+                Text("추후 진행할 테스트의 레벨이 조정됩니다!")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 16))
+            }
+            Spacer()
+        }
+        .padding(.horizontal)
     }
 }
+
+
 // MARK: -select Box 뷰
 struct SelectBoxView: View {
     @StateObject private var selectBoxViewModel = SelectBoxViewModel()
@@ -61,7 +74,7 @@ struct SelectBoxView: View {
             }
             .padding()
         }
-        .frame(height: 400)
+        .frame(height: 470)
     }
 }
 
@@ -73,10 +86,12 @@ struct SelectableBoxView: View {
         Button(action: action) {
             ZStack(alignment: .topTrailing) {
                 Text(item.title)
+                    .font(.headline)
                     .foregroundColor(.white)
-                    .frame(width: 113, height: 113)
+                    .padding()
+                    .frame(maxWidth: .infinity)
                     .background(Color.gray)
-                    .cornerRadius(10)
+                    .cornerRadius(5.0)
 
                 if item.isSelected {
                     Image(systemName: "checkmark.square.fill")
@@ -95,6 +110,7 @@ struct SelectableBoxView: View {
         }
     }
 }
+
 // MARK: -Button 뷰
 struct selectedButtonView : View {
     @StateObject private var selectBoxViewModel = SelectBoxViewModel()
