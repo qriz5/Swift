@@ -8,44 +8,54 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var pathModel: PathModel
     var body: some View {
-        NavigationStack{
-            
-            VStack(spacing : 20) {
-                Spacer()
-                
-                Spacer()
-                
-                CustomNavigationBar()
-                
-                Spacer()
-                
-                Spacer()
-                
-                LogoImageView()
-                
-                Spacer()
-                
-                LoginButtonView()
-                
-                SocialLoginButtonView()
-                
-                Spacer()
-                
-                SignUpView()
-                
-                Spacer()
-                
-                Spacer()
-                
-                Spacer()
-                
-                Spacer()
-                
-            }
+        NavigationStack(path: $pathModel.paths) {
+            LoginContentView(loginViewModel: LoginViewModel())
+                .navigationDestination(
+                    for: PathType.self,
+                    destination: { PathType in
+                        switch PathType {
+                        case .signUpView:
+                            SignUpView()
+                                .navigationBarBackButtonHidden()
+                        case .findIdView:
+                            FindIdView()
+                                .navigationBarBackButtonHidden()
+                        case let .findPwView:
+                            FindPwView()
+                                .navigationBarBackButtonHidden()
+                        }
+                 }
+                )
         }
+        .environmentObject(pathModel)
     }
 }
+// MARK: -
+private struct LoginContentView: View {
+    @ObservedObject private var loginViewModel: LoginViewModel
+    
+    fileprivate init(loginViewModel: LoginViewModel) {
+        self.loginViewModel = loginViewModel
+    }
+    
+    fileprivate var body: some View {
+        VStack(spacing : 20) {
+            CustomNavigationBar(
+            )
+            Spacer().frame(height: 150)
+            LogoImageView()
+            Spacer()
+            LoginButtonView(loginviewModel: LoginViewModel())
+            SocialLoginButtonView()
+            Spacer()
+            SignUpFindView()
+        }
+        .edgesIgnoringSafeArea(.top)
+    }
+}
+
 // MARK: - 로고 이미지 뷰
 private struct LogoImageView: View {
     fileprivate var body: some View {
@@ -55,36 +65,34 @@ private struct LogoImageView: View {
                 
                 Image("benner")
                     .resizable()
-                    .frame(width: 275,height: 138)
+                    .frame(width: 260,height: 130)
+                
                 Spacer(minLength: 30)
             }
         }
         
 }
 // MARK: - 로그인 입력창 뷰
-private struct LoginButtonView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
+struct LoginButtonView: View {
+    @ObservedObject var loginviewModel: LoginViewModel
     
-    fileprivate var body: some View {
+     var body: some View {
         
             VStack(spacing: 20) {
                 
                         // 아이디 입력 필드
-                        TextField("아이디 혹은 이메일 주소를 입력해 주세요.", text: $username)
+                        TextField("아이디 혹은 이메일 주소를 입력해 주세요.", text: $loginviewModel.username)
                             .font(.system(size: 18))
-                            .frame(height:32)
+                            .frame(height:28)
                             .padding()
-                            .background(Color("F2F3F5"))
                             .cornerRadius(5.0)
                             .padding(.horizontal, 7)
                         
                         // 비밀번호 입력 필드
-                        SecureField("비밀번호를 입력해주세요.", text: $password)
+                        SecureField("비밀번호를 입력해주세요.", text: $loginviewModel.password)
                             .font(.system(size: 18))
-                            .frame(height:32)
+                            .frame(height:28)
                             .padding()
-                            .background(Color.custom_wgrey)
                             .cornerRadius(5.0)
                             .padding(.horizontal, 7)
                         
@@ -95,7 +103,7 @@ private struct LoginButtonView: View {
                         }) {
                             Text("로그인")
                                 .font(.system(size: 18, weight: .bold))
-                                .frame(height:32)
+                                .frame(height:28)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -140,12 +148,13 @@ private struct SocialLoginButtonView: View {
     }
 }
 // MARK: - 회원가입 아이디 비밀번호 찾기 뷰
-private struct SignUpView: View {
+private struct SignUpFindView: View {
+    @EnvironmentObject private var pathModel: PathModel
+    
     fileprivate var body: some View {
         HStack(spacing: 5) {
                     Button(action: {
-                        // 회원가입 버튼 클릭 시 수행할 작업
-                        print("회원가입 버튼 클릭됨")
+                        pathModel.paths.append(.signUpView)
                     }) {
                         Text("회원가입")
                             .foregroundColor(.gray)
@@ -156,8 +165,7 @@ private struct SignUpView: View {
                         .font(.system(size: 16))
             
                     Button(action: {
-                        // 아이디 찾기 버튼 클릭 시 수행할 작업
-                        print("아이디 찾기 버튼 클릭됨")
+                        pathModel.paths.append(.findIdView)
                     }) {
                         Text("아이디 찾기")
                             .foregroundColor(.gray)
@@ -167,8 +175,7 @@ private struct SignUpView: View {
                         .foregroundColor(.gray)
                         .font(.system(size: 16))
                     Button(action: {
-                        // 비밀번호 찾기 버튼 클릭 시 수행할 작업
-                        print("비밀번호 찾기 버튼 클릭됨")
+                        pathModel.paths.append(.findPwView)
                     }) {
                         Text("비밀번호 찾기")
                             .foregroundColor(.gray)
@@ -176,6 +183,7 @@ private struct SignUpView: View {
                     }
                 }
                 .padding()
+                Spacer().frame(height: 200)
 
     }
 
@@ -183,4 +191,5 @@ private struct SignUpView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(PathModel())
 }
