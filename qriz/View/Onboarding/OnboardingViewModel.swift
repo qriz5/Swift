@@ -29,7 +29,7 @@ class SelectBoxViewModel: ObservableObject {
     ]
     
     var chunkedItems: [[SelectableBox]] {
-        items.chunked(into: 3)
+        items.chunked(into: 1)
     }
     
 //    func toggleSelection(of item: SelectableBox) {
