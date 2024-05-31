@@ -29,9 +29,9 @@ struct FindIdPwView: View {
                 Spacer()
                 
                 if selectedSegment == 0 {
-                    FindIdView(findIdPwViewModel: FindIdPwViewModel())
+                    FindIdView_sub(findIdPwViewModel: FindIdPwViewModel())
                 } else {
-                    FindPwView(findIdPwViewModel: FindIdPwViewModel())
+                    FindPwView_sub(findIdPwViewModel: FindIdPwViewModel())
                 }
                 
                 Spacer()
@@ -44,7 +44,7 @@ struct FindIdPwView: View {
 
 
 // MARK: - 아이디 찾기 뷰
-struct FindIdView: View {
+struct FindIdView_sub: View {
     @ObservedObject var findIdPwViewModel: FindIdPwViewModel
 
     var body: some View {
@@ -58,6 +58,8 @@ struct FindIdView: View {
                 .padding()
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(5.0)
+            
+            Spacer().frame(height: 15)
             
             Text("이메일")
                 .font(.system(size: 18))
@@ -94,7 +96,7 @@ struct FindIdView: View {
 }
 
 // MARK: - 비밀번호 찾기 뷰
-struct FindPwView: View {
+struct FindPwView_sub: View {
     @ObservedObject var findIdPwViewModel: FindIdPwViewModel
 
     var body: some View {
@@ -108,7 +110,9 @@ struct FindPwView: View {
                 .padding()
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(5.0)
-
+            
+            Spacer().frame(height: 15)
+            
             Text("이메일")
                 .font(.system(size: 18))
                 .frame(maxWidth: .infinity, alignment: .leading)
