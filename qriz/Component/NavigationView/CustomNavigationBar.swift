@@ -30,32 +30,45 @@ struct CustomNavigationBar: View {
         self.rightBtnAction = rightBtnAction
         self.centerTitleType = centerTitleType
     }
+    
     var body: some View {
-        HStack {
-            if isDisplayLeftBtn {
-                Button (
-                    action: leftBtnAction,
-                    label: { Image("leftArrow") }
-                )
+            HStack {
+                if isDisplayLeftBtn {
+                    Button (
+                        action: leftBtnAction,
+                        label: { Image("leftArrow") }
+                    ).frame(width: 40)
+                } else {
+                    Spacer()
+                        .frame(width: 40)
+                }
+                
+                Spacer()
+                
+                if isCenterTitle {
+                    Text(centerTitleType.rawValue)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                } else {
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                if isDisplayRightBtn {
+                    Button(action: rightBtnAction) {
+                        Image("rightIcon")
+                            .resizable()
+                            .frame(width: 40, height: 24)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                } else {
+                    Spacer()
+                        .frame(width: 40)
+                }
             }
-            Spacer()
-            
-            if isCenterTitle {
-                Text(centerTitleType.rawValue)
-                    .font(.headline)
-                    .foregroundColor(.primary)
-            }
-            Spacer()
-            
-            if isDisplayRightBtn {
-                Image("")
-                    .resizable()
-                    .frame(width: 24, height: 24) // Adjust width and height as needed
-                    .aspectRatio(contentMode: .fit)
-            }
-        }
-        .padding(.horizontal, 20)
-        .frame(height: 20)
+            .padding(.horizontal, 20)
+            .frame(height: 44)
     }
 }
 
