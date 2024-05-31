@@ -8,9 +8,10 @@
 import Foundation
 
 enum NavigationTitleType: String {
-    case close
+    case close = ""
     case signup = "회원가입"
-    case idpw = "아이디 / 비밀번호 찾기"
+    case id = "아이디 찾기 "
+    case pw = "비밀번호 찾기"
     case mypage = "마이페이지"
     case setting = "설정"
     case exam = "시험등록"
