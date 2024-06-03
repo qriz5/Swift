@@ -10,7 +10,8 @@ import SwiftUI
 struct FindPwView: View {
     @EnvironmentObject var pathModel: PathModel
     @StateObject var findPwViewModel = FindPwViewModel()
-    @State private var isButtonClicked = false
+//    @State private var isButtonClicked = false
+    @State private var showEmailSentAlert = false
     
     var body: some View {
         VStack{
@@ -31,13 +32,21 @@ struct FindPwView: View {
                 .onChange(of: findPwViewModel.email) { _ in
                     findPwViewModel.validateEmail()
                 }
-            
-            SendEmailButton()
-                .onTapGesture {
-                    isButtonClicked = true
-                    findPwViewModel.validateEmail()
-                }
+            SendEmailButton(onSuccess: {
+                showEmailSentAlert = true
+            })
         }
+        .overlay(
+            showEmailSentAlert ? AnyView(
+                CustomSendEmailView(
+                    title: "이메일 발송 완료!",
+                    subtitle: "입력해주신 이메일 주소로 아이디가 발송되었\n습니다. 메일함을 확인해주세요.",
+                    onDismiss: {
+                        showEmailSentAlert = false
+                    }
+                )
+            ) : AnyView(EmptyView())
+        )
     }
 }
 
