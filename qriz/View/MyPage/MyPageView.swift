@@ -8,36 +8,56 @@
 import SwiftUI
 
 struct MyPageView: View {
-    @EnvironmentObject private var pathModel: PathModel
+    @EnvironmentObject private var mypathModel: MyPagePathModel
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $mypathModel.paths) {
             VStack {
-                
-                CustomNavigationBar(
-                    leftBtnAction: {
-                        pathModel.paths.removeLast()
-                    }
-                )
-                
-                Spacer().frame(height:30)
-                
-                MyPageTitleView(userName: "User Name") // 여기에 사용자의 이름을 전달하세요.
-                
-                Spacer().frame(height:30)
-                
-                MyPageExamView()
-                
-                Spacer().frame(height:30)
-                
-                Divider().background(Color.black).frame(height: 10)
-                
-                MyPageServiceView()
-                
-                Spacer()
+                MyPageViewContentView()
             }
-            .padding()
+            .navigationDestination(
+                for: MyPagePathType.self,
+                destination: { MyPagePathType in
+                    switch MyPagePathType {
+                    case .registView:
+                        ExamRegistView()
+                            .navigationBarBackButtonHidden()
+                    }
+                }
+            )
         }
+        .environmentObject(mypathModel)
+    }
+}
+
+struct MyPageViewContentView : View {
+    
+    var body: some View {
+        VStack {
+            CustomNavigationBar(
+                isDisplayLeftBtn: false,
+                isDisplayRightBtn: false,
+                isCenterTitle: true,
+                centerTitleType: .mypage
+            )
+            
+            Spacer().frame(height:30)
+            
+            MyPageTitleView(userName: "User Name") // 여기에 사용자의 이름을 전달하세요.
+            
+            Spacer().frame(height:30)
+            
+            MyPageExamView()
+            
+            Spacer().frame(height:30)
+            
+            Divider().background(Color.black).frame(height: 10)
+            
+            MyPageServiceView()
+            
+            Spacer()
+        }
+        .padding()
     }
 }
 
@@ -48,7 +68,7 @@ struct MyPageTitleView: View {
     var body: some View {
         HStack{
             Text(userName)
-                .font(.system(size: 32,weight: .bold))
+                .font(.system(size: 24,weight: .bold))
                 .padding(.top)
             Spacer()
         }
@@ -58,6 +78,9 @@ struct MyPageTitleView: View {
 
 // MARK: - 상단 시험 관련 버튼 뷰
 struct MyPageExamView: View {
+    @EnvironmentObject private var mypathModel: MyPagePathModel
+    @State var showModal = false
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -99,7 +122,7 @@ struct MyPageExamView: View {
             }
 
             Button(action: {
-                // Action for Button 3
+                self.showModal.toggle()
             }) {
                 VStack {
                     Image("Frame39")
@@ -115,6 +138,9 @@ struct MyPageExamView: View {
                 .background(Color(red: 0.9, green: 0.9, blue: 0.9))
                 .cornerRadius(8)
                 .padding(4)
+                .sheet(isPresented: self.$showModal) {
+                    ExamRegistView()
+                }
             }
         }
         .padding(3)
@@ -126,24 +152,21 @@ struct MyPageServiceView: View {
     @StateObject private var myPageViewModel = MyPageViewModel()
     
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("고객 센터").font(.system(size: 16))) {
-                    ForEach(myPageViewModel.services, id: \.self) { service in
-                        NavigationLink(destination: DetailView(title: service)) {
-                            Text(service)
-                                .font(.system(size: 16))
-                                .padding(.vertical, 10)
-                                .foregroundColor(.black)
-                        }
-                        .listRowSeparator(.hidden)
+        List {
+            Section(header: Text("고객 센터").font(.system(size: 16))) {
+                ForEach(myPageViewModel.services, id: \.self) { service in
+                    NavigationLink(destination: DetailView(title: service)) {
+                        Text(service)
+                            .font(.system(size: 16))
+                            .padding(.vertical, 10)
+                            .foregroundColor(.black)
                     }
+                    .listRowSeparator(.hidden)
                 }
             }
-            .listStyle(PlainListStyle())
-            .environment(\.defaultMinListRowHeight, 70)
         }
-
+        .listStyle(PlainListStyle())
+        .environment(\.defaultMinListRowHeight, 70)
     }
 }
 
@@ -160,6 +183,8 @@ struct DetailView: View {
         .navigationBarTitle(title, displayMode: .inline)
     }
 }
+
 #Preview {
     MyPageView()
+        .environmentObject(MyPagePathModel())
 }
