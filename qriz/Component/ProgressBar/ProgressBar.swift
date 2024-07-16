@@ -26,3 +26,21 @@ struct ProgressBar: View {
         .background(Color.gray.opacity(0.1)) // Light gray background
     }
 }
+
+// MARK: - 문제 진행률 프로그래스 바
+struct ExamProgressBar: View {
+    let value: Double
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Capsule()
+                .frame(height: 8)
+                .foregroundColor(Color.gray.opacity(0.2))
+            
+            Capsule()
+                .frame(width: CGFloat(value) * UIScreen.main.bounds.width , height: 4)
+                .foregroundColor(Color.gray.opacity(0.8))
+                .animation(.linear, value: value)
+        }
+    }
+}
