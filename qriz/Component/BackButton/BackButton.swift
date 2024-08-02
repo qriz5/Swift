@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct BackButton: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image("Back")
+                .foregroundColor(.black)
+                .font(.system(size: 24, weight: .bold))
+        }
     }
 }
 
-#Preview {
-    BackButton()
-}
