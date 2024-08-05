@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
+
+class ConceptBookDetailViewModel: ObservableObject {
+    @Published var subject: Subject
+    
+    init(subject: Subject) {
+        self.subject = subject
+    }
+}
