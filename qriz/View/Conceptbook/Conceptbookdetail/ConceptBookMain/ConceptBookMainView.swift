@@ -12,15 +12,25 @@ struct ConceptBookMainView: View {
     @ObservedObject var conceptBookMainViewModel: ConceptBookMainViewModel
     
     var body: some View {
-        VStack {
-            TitleConceptBookView(topic: conceptBookMainViewModel.topic, subjectType: conceptBookMainViewModel.subjectType)
-            
-            PDFKitView(pdfURL: conceptBookMainViewModel.pdfURL)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.gray)
-            
+        ZStack {
+            Color.customBackground.edgesIgnoringSafeArea(.all)
+            VStack(spacing:0) {
+                Spacer().frame(height: 1)
+                TitleConceptBookView(topic: conceptBookMainViewModel.topic, subjectType: conceptBookMainViewModel.subjectType)
+                
+                PDFKitView(pdfURL: conceptBookMainViewModel.pdfURL)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.gray)
+                
+            }
+            .navigationTitle(conceptBookMainViewModel.topic)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButton()
+                }
+            }
         }
-        .navigationTitle("개념서 상세")
     }
 }
 
@@ -43,7 +53,7 @@ struct TitleConceptBookView: View {
             }
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color(.systemGray5))
+            .background(Color.white)
         }
     }
 }
