@@ -8,16 +8,41 @@
 import SwiftUI
 
 struct MainPageView: View {
+    @StateObject private var homeViewModel = HomeViewModel()
+
     var body: some View {
-        ScrollView {
-            VStack{
-                ExamScheduleView(mainPageViewModel: MainPageViewModel())
-                
-                DailyScheduleView()
-                
-                Spacer()
+        NavigationStack {
+            ZStack {
+                Color.customBackground.edgesIgnoringSafeArea(.all)
+
+                ScrollView {
+                    VStack {
+                        ExamMainLogoView()
+                        ExamScheduleView(mainPageViewModel: MainPageViewModel())
+                        Spacer().frame(height: 30)
+                        ReviewTestExamButtonView()
+                        Spacer().frame(height: 40)
+                        DailyScheduleView()
+                        Spacer()
+                    }
+                    .background(Color.customBackground)
+                }
             }
         }
+    }
+}
+
+//MARK: 메인로고
+struct ExamMainLogoView: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Image("MainLogo")
+                Spacer()
+            }
+            .padding()
+        }
+        .background(Color.customBackground)
     }
 }
 
@@ -25,7 +50,7 @@ struct MainPageView: View {
 struct ExamScheduleView: View {
     @ObservedObject var mainPageViewModel: MainPageViewModel
     @State var showModal = false
-    var intnumber = 2 //시험 정보 등록 여부 임시
+    var intnumber = 2
     
     var body: some View {
         HStack {
@@ -67,9 +92,10 @@ struct ExamScheduleView: View {
                                  .foregroundColor(.white)
                                  .frame(maxWidth: .infinity)
                                  .padding()
-                                 .background(Color.blue)
-                                 .cornerRadius(5.0)
+                                 .background(Color.customButton)
+                                 .cornerRadius(10)
                                  .padding(.horizontal, 7)
+                                 .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
                          }
                          .frame(maxWidth: .infinity, alignment: .center)
                          .sheet(isPresented: self.$showModal) {
@@ -95,25 +121,25 @@ struct ExamScheduleView: View {
                      
                      HStack(spacing: 0) {
                          Text("D")
-                             .foregroundColor(.black)
+                             .foregroundColor(.white)
                              .font(.system(size: 32, weight: .bold))
                              .padding(4)
-                             .frame(width:50, height:50)
-                             .background(Color.gray)
-                             .cornerRadius(4)
+                             .frame(width:60, height:60)
+                             .background(Color.customButton)
+                             .cornerRadius(10)
                              
                          
                          Text(" - ")
-                             .foregroundColor(.black)
+                             .foregroundColor(Color.customButton)
                              .font(.system(size: 32, weight: .bold))
                          
                          Text("30")
-                             .foregroundColor(.black)
+                             .foregroundColor(.white)
                              .font(.system(size: 32, weight: .bold))
                              .padding(4)
-                             .frame(width:60, height: 50)
-                             .background(Color.gray)
-                             .cornerRadius(4)
+                             .frame(width:70, height: 60)
+                             .background(Color.customButton)
+                             .cornerRadius(10)
                      }
                      
                      Spacer().frame(height:50)
@@ -160,9 +186,10 @@ struct ExamScheduleView: View {
                                  .foregroundColor(.white)
                                  .frame(maxWidth: .infinity)
                                  .padding()
-                                 .background(Color.blue)
-                                 .cornerRadius(5.0)
+                                 .background(Color.customButton)
+                                 .cornerRadius(10)
                                  .padding(.horizontal, 7)
+                                 .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
                          }
                          .frame(maxWidth: .infinity, alignment: .center)
                          .sheet(isPresented: self.$showModal) {
@@ -177,29 +204,26 @@ struct ExamScheduleView: View {
                  }
              }
              .padding()
+             .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
              Spacer()
         }
-        .background(Color.gray.opacity(0.1))
+        .background(Color.customBackground)
     }
 }
 
 //MARK: 오늘의 공부 이동 화면
 struct DailyScheduleView: View {
-    @State private var selectedDay: Int? = nil
+    @StateObject private var mainPageViewModel = MainPageViewModel()
 
-    init(initialSelectedDay: Int? = nil) {
-        _selectedDay = State(initialValue: initialSelectedDay)
-    }
-    
     var body: some View {
         VStack {
-            StudyButtonListView(selectedDay: $selectedDay)
+            StudyButtonListView(selectedDay: $mainPageViewModel.selectedDay)
             DailyStudyView()
             DailyStudyButtonView()
             Spacer().frame(height: 50)
-            ReviewTestExamButtonView()
         }
-        .background(Color.gray.opacity(0.1))
+        .background(Color.customBackground)
+        .environmentObject(mainPageViewModel)
     }
 }
 
@@ -208,9 +232,7 @@ struct StudyButtonListView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 40)
-            
-            HStack{
+            HStack {
                 Spacer().frame(width: 5)
                 Text("오늘의 공부")
                     .font(.system(size: 20, weight: .bold))
@@ -219,21 +241,21 @@ struct StudyButtonListView: View {
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
+                HStack(spacing: 10) {
                     ForEach(1...10, id: \.self) { index in
                         StudyButton(title: "Day", subtitle: "\(index)", isSelected: Binding(
                             get: { selectedDay == index },
                             set: { isSelected in
                                 if isSelected {
                                     selectedDay = index
-                                } else {
+                                } else if selectedDay == index {
                                     selectedDay = nil
                                 }
                             }
                         ))
-                        .frame(width: 80, height: 80)
-                        .background(Color.white)
-                        .cornerRadius(20)
+                        .frame(width: 78, height: 74)
+                        .background(Color.red)
+                        .cornerRadius(8)
                     }
                 }
                 .padding(.vertical, 10)
@@ -252,59 +274,71 @@ struct StudyButton: View {
         Button(action: {
             isSelected.toggle()
         }) {
-            VStack(spacing: 8) {
+            VStack(spacing: 4) {
                 Text(title)
-                    .font(.headline)
-                    .foregroundColor(isSelected ? .white : .black)
+                    .font(.system(size: 12))
+                    .foregroundColor(isSelected ? Color.custommainDayTC_on : Color.custommainDayTC_off)
+                    .padding(.top, 8)
                 
                 Text(subtitle)
-                    .font(.title3)
+                    .font(.system(size: 12))
                     .fontWeight(.bold)
-                    .foregroundColor(isSelected ? .white : .black)
+                    .foregroundColor(isSelected ? Color.white : Color.white)
                     .padding(10)
-                    .background(isSelected ? Color.black : Color.clear)
+                    .background(isSelected ? Color.custommainDayTC_on : Color.custommainDayTC_off)
                     .clipShape(Circle())
+                    .padding(.bottom, 0)
             }
             .padding(8)
         }
-        .frame(width: 80, height: 80)
-        .background(isSelected ? Color.gray : Color.white)
-        .cornerRadius(20)
+        .frame(width: 78, height: 74)
+        .background(isSelected ? Color.white : Color.custommainDayBC_off)
+        .cornerRadius(8)
     }
 }
 
 //MARK: 오늘의 공부 뷰
 struct DailyStudyView: View {
+    @EnvironmentObject var mainPageViewModel: MainPageViewModel
     var body: some View {
-        @State var firstText: String = "관련 내용들"
-        
+
         VStack {
             VStack(alignment: .leading) {
+                Spacer().frame(height: 20)
                 Text("공부해야 하는 주제는")
                     .font(.subheadline)
                     .padding(.bottom, 2)
                 
-                Text("SQL기본 - 해당 주제 제목")
+                Text(mainPageViewModel.topicTitle)
                     .font(.headline)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 5)
                 
                 Divider().background(Color.black).frame(height: 10)
                 
-                Text("해당 주제")
+                Text(mainPageViewModel.subTopicTitle)
                     .font(.headline)
                     .padding(.bottom, 2)
                 
-                TextEditor(text: $firstText)
-                    .font(.headline)
-                    .frame(height: 130)
-                    .padding(.bottom, 2)
-                    .multilineTextAlignment(.leading)
+                HStack(alignment: .top, spacing: 4) {
+                    Text("•")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color.gray)
+                        .padding(.top, 4)
+                    
+                    TextEditor(text: $mainPageViewModel.firstText)
+                        .font(.system(size: 14))
+                        .foregroundColor(Color.gray)
+                        .frame(height: 130)
+                        .padding(.bottom, 2)
+                        .multilineTextAlignment(.leading)
+                }
+                .padding(.leading, 8)
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 300)
+            .frame(height: 250)
             .padding(.horizontal, 16)
             .background(Color.white)
-            .cornerRadius(20)
+            .cornerRadius(8)
             
             Spacer()
         }
@@ -313,88 +347,32 @@ struct DailyStudyView: View {
 }
 // MARK: 학습하러가기 버튼
 struct DailyStudyButtonView: View {
+    @EnvironmentObject var homeViewModel: HomeViewModel
+
     var body: some View {
         Button(action: {
-            // 버튼 클릭 시 실행할 동작
+            homeViewModel.changeSelectedTab(.test) // ConceptBook 탭으로 전환
         }) {
             Text("학습하러 가기")
                 .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
         }
-        .frame(height: 50)
+        .frame(height: 60)
+        .background(Color.customButton)
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 2)
-        )
         .padding(.horizontal)
     }
 }
 
-// MARK: 오답노트 및 테스트 모의고사  버튼
+// MARK:  모의고사  버튼
 struct ReviewTestExamButtonView: View {
     var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    // 버튼 클릭 시 실행할 동작
-                }) {
+        NavigationLink(destination: ExamView()) {
+            VStack {
+                HStack {
                     VStack(alignment: .leading) {
-                        Text("오답노트 모아보기")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.black)
-                        
-                        Spacer().frame(height: 10)
-                        
-                        Text("틀렸던 문제를 다시 복습해요!")
-                            .font(.system(size: 14))
-                            .foregroundColor(.black)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                }
-                .frame(height: 80)
-                .padding(.horizontal)
-            }
-            
-            Spacer().frame(height: 50)
-            
-            HStack(spacing: 20) {
-                Button(action: {
-                    // 버튼 클릭 시 실행할 동작
-                }) {
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        
-                        Text("오늘의 테스트")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.black)
-                        
-                        Spacer().frame(height: 10)
-                        
-                        Text("실전처럼 준비하기!")
-                            .font(.system(size: 14))
-                            .foregroundColor(.black)
-                        
-                        Spacer().frame(height: 10)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                }
-                .frame(width: 160, height: 135)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-                Button(action: {
-                    
-                }) {
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        
                         Text("모의고사 응시")
                             .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.black)
@@ -404,20 +382,35 @@ struct ReviewTestExamButtonView: View {
                         Text("실전처럼 준비하기")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
-                        
-                        Spacer().frame(height: 10)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
+                    
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Image("Group")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                        }
+                        Image("Vector")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 140, height: 20)
+                    }
+                    .padding()
                 }
-                .frame(width: 160, height: 135)
-                .background(Color.gray.opacity(0.1))
+                .background(Color.white)
                 .cornerRadius(10)
+                .frame(height: 80)
+                .padding(.horizontal)
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
             }
-            .padding(.horizontal) // 전체 여백 설정
         }
     }
 }
+
 
 #Preview {
     MainPageView()
