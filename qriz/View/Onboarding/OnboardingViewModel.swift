@@ -15,6 +15,8 @@ class OnboardingViewModel : ObservableObject {
 class SelectBoxViewModel: ObservableObject {
     @Published private(set) var selectedItems: [String] = []
     @Published var items: [SelectableBox] = [
+        SelectableBox(title: "전혀 몰라요"),
+        SelectableBox(title: "전부 알아요"),
         SelectableBox(title: "항목 1"),
         SelectableBox(title: "항목 2"),
         SelectableBox(title: "항목 3"),
@@ -23,9 +25,7 @@ class SelectBoxViewModel: ObservableObject {
         SelectableBox(title: "항목 6"),
         SelectableBox(title: "항목 7"),
         SelectableBox(title: "항목 8"),
-        SelectableBox(title: "항목 9"),
-        SelectableBox(title: "항목 9"),
-        SelectableBox(title: "항목 10")
+        SelectableBox(title: "항목 9")
     ]
     
     var chunkedItems: [[SelectableBox]] {
