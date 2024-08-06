@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct ExamView: View {
-            var body: some View {
-                Text("")
-        }
-
-
+struct TestView: View {
+    var body: some View {
+        Text("")
+    }
+}
 #Preview {
     TestView()
 }
