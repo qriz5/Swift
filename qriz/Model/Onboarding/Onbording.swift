@@ -13,17 +13,3 @@ struct SelectableBox: Hashable, Identifiable {
     var isSelected: Bool = false
 
 }
-//struct SelectableBox: Hashable, Equatable {
-//    var title: String
-//    var isSelected: Bool
-//    var action: () -> Void
-//    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(title)
-//        hasher.combine(isSelected)
-//    }
-//    
-//    static func == (lhs: SelectableBox, rhs: SelectableBox) -> Bool {
-//        return lhs.title == rhs.title && lhs.isSelected == rhs.isSelected
-//    }
-//}
