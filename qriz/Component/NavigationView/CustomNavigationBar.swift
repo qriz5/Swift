@@ -57,7 +57,7 @@ struct CustomNavigationBar: View {
                 
                 if isDisplayRightBtn {
                     Button(action: rightBtnAction) {
-                        Image("rightIcon")
+                        Image("setting")
                             .resizable()
                             .frame(width: 40, height: 24)
                             .aspectRatio(contentMode: .fit)
@@ -67,7 +67,7 @@ struct CustomNavigationBar: View {
                         .frame(width: 40)
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 10)
             .frame(height: 44)
     }
 }
