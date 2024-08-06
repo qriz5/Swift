@@ -11,22 +11,14 @@ struct MyPageView: View {
     @EnvironmentObject private var mypathModel: MyPagePathModel
     
     var body: some View {
-        NavigationStack(path: $mypathModel.paths) {
-            VStack {
-                MyPageViewContentView()
-            }
-            .navigationDestination(
-                for: MyPagePathType.self,
-                destination: { MyPagePathType in
-                    switch MyPagePathType {
-                    case .registView:
-                        ExamRegistView()
-                            .navigationBarBackButtonHidden()
-                    }
+        NavigationView {
+            ZStack {
+                Color.customBackground.edgesIgnoringSafeArea(.all)
+                VStack {
+                    MyPageViewContentView()
                 }
-            )
+            }
         }
-        .environmentObject(mypathModel)
     }
 }
 
@@ -43,7 +35,7 @@ struct MyPageViewContentView : View {
             
             Spacer().frame(height:30)
             
-            MyPageTitleView(userName: "User Name") // 여기에 사용자의 이름을 전달하세요.
+            MyPageTitleView(userName: "User Name")
             
             Spacer().frame(height:30)
             
@@ -51,9 +43,8 @@ struct MyPageViewContentView : View {
             
             Spacer().frame(height:30)
             
-            Divider().background(Color.black).frame(height: 10)
-            
             MyPageServiceView()
+            
             
             Spacer()
         }
@@ -70,6 +61,15 @@ struct MyPageTitleView: View {
             Text(userName)
                 .font(.system(size: 24,weight: .bold))
                 .padding(.top)
+            
+            NavigationLink(destination: SettingView()) {
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.black)
+                    .padding(3)
+            }
+            
             Spacer()
         }
         .padding(3)
@@ -80,66 +80,56 @@ struct MyPageTitleView: View {
 struct MyPageExamView: View {
     @EnvironmentObject private var mypathModel: MyPagePathModel
     @State var showModal = false
+    @EnvironmentObject var homeViewModel: HomeViewModel
     
     var body: some View {
         HStack {
+            
             Button(action: {
-                // Action for Button 1
+                homeViewModel.changeSelectedTab(.conceptBook)
             }) {
                 VStack {
-                    Image("Frame39")
+                    Image("oximg")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 35, height: 35)
                         .padding(.bottom, 4)
-                    Text("정오답노트")
+                    Text("오답노트")
                         .font(.system(size: 16))
                         .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                 }
                 .frame(maxWidth: .infinity, maxHeight: 90)
-                .background(Color(red: 0.9, green: 0.9, blue: 0.9))
+                .background(Color.white)
                 .cornerRadius(8)
+                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 .padding(4)
             }
-
-            Button(action: {
-                // Action for Button 2
-            }) {
-                VStack {
-                    Image("Frame39")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 35, height: 35)
-                        .padding(.bottom, 4)
-                    Text("점수 보기")
-                        .font(.system(size: 16))
-                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                }
-                .frame(maxWidth: .infinity, maxHeight: 90)
-                .background(Color(red: 0.9, green: 0.9, blue: 0.9))
-                .cornerRadius(8)
-                .padding(4)
-            }
-
+            
+            
+            
             Button(action: {
                 self.showModal.toggle()
             }) {
                 VStack {
-                    Image("Frame39")
+                    Image("icon_con_Exam")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 35, height: 35)
                         .padding(.bottom, 4)
                     Text("시험 등록")
-                        .font(.system(size: 16))
+                        .font(.system(size: 16))                        
                         .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                 }
                 .frame(maxWidth: .infinity, maxHeight: 90)
-                .background(Color(red: 0.9, green: 0.9, blue: 0.9))
+                .background(Color.white)
                 .cornerRadius(8)
+                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 .padding(4)
                 .sheet(isPresented: self.$showModal) {
                     ExamRegistView()
+                        .presentationDetents([
+                            .fraction(0.75)
+                        ])
                 }
             }
         }
@@ -149,42 +139,77 @@ struct MyPageExamView: View {
 
 // MARK: - 고객 센터 리스트 뷰
 struct MyPageServiceView: View {
-    @StateObject private var myPageViewModel = MyPageViewModel()
-    
     var body: some View {
-        List {
-            Section(header: Text("고객 센터").font(.system(size: 16))) {
-                ForEach(myPageViewModel.services, id: \.self) { service in
-                    NavigationLink(destination: DetailView(title: service)) {
-                        Text(service)
-                            .font(.system(size: 16))
-                            .padding(.vertical, 10)
-                            .foregroundColor(.black)
-                    }
-                    .listRowSeparator(.hidden)
-                }
+        VStack(alignment: .leading, spacing: 10) {
+            Text("고객센터")
+                .font(.headline)
+                .padding(.leading)
+            Divider()
+
+            HStack {
+                Text("FAQ")
+                    .font(.body)
+                Spacer()
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
             }
+            .frame(height: 45)
+            .padding(.horizontal)
+            
+            HStack {
+                Text("서비스 이용약관")
+                    .font(.body)
+                Spacer()
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .frame(height: 45)
+            .padding(.horizontal)
+            
+            HStack {
+                Text("개인정보처리 방침")
+                    .font(.body)
+                Spacer()
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .frame(height: 45)
+            .padding(.horizontal)
+            
+            HStack {
+                Text("버전정보")
+                    .font(.body)
+                Spacer()
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .frame(height: 45)
+            .padding(.horizontal)
+            
+            HStack {
+                Text("공지사항")
+                    .font(.body)
+                Spacer()
+                Image("Property")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .frame(height: 45)
+            .padding(.horizontal)
         }
-        .listStyle(PlainListStyle())
-        .environment(\.defaultMinListRowHeight, 70)
+        .padding(20)
+        .background(Color.white)
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
 }
 
-struct DetailView: View {
-    var title: String
-    
-    var body: some View {
-        VStack {
-            Text("\(title) 화면")
-                .font(.largeTitle)
-                .padding()
-            Spacer()
-        }
-        .navigationBarTitle(title, displayMode: .inline)
-    }
-}
+
 
 #Preview {
     MyPageView()
-        .environmentObject(MyPagePathModel())
 }
