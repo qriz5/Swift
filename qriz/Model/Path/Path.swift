@@ -15,7 +15,14 @@ class PathModel: ObservableObject {
     }
 }
 
-// 간단한 PathModel 정의
 class PathModelSign: ObservableObject {
     @Published var paths: [String] = []
+}
+
+class MyPagePathModel: ObservableObject {
+    @Published var paths: [MyPagePathType]
+    
+    init(paths: [MyPagePathType] = []) {
+        self.paths = paths
+    }
 }

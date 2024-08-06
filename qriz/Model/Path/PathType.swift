@@ -33,3 +33,7 @@ enum SignUpStep {
         }
     }
 }
+
+enum MyPagePathType: Hashable {
+    case registView
+}
