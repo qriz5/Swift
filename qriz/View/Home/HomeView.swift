@@ -9,60 +9,72 @@ import SwiftUI
 
 struct HomeView: View {
     
-//    @EnvironmentObject private var pathModel: PathModel
     @StateObject private var homeViewMoodel = HomeViewModel()
-    
+    @StateObject private var myPagePathModel = MyPagePathModel()
     
     var body: some View {
         ZStack {
             TabView(selection: $homeViewMoodel.selectedTab) {
                 MainPageView()
                 .tabItem {
-                    Image(
-                        homeViewMoodel.selectedTab == .mainPage
-                        ? "Frame 39"
-                        : "Frame 40"
-                    )
+                    VStack{
+                        Image(
+                            homeViewMoodel.selectedTab == .mainPage
+                            ? "tab_home_on"
+                            : "tab_home_off"
+                        )
+                        Text("홈")
+                            .font(.system(size: 50, weight: .bold))
+                    }
                 }
                 .tag(Tab.mainPage)
                 
-                TestView()
+                ConceptBookView()
                 .tabItem {
-                    Image(
-                        homeViewMoodel.selectedTab == .test
-                        ? "Frame 39"
-                        : "Frame 40"
-                    )
+                    VStack{
+                        Image(
+                            homeViewMoodel.selectedTab == .test
+                            ? "tab_book_on"
+                            : "tab_book_off"
+                        )
+                        Text("개념서")
+                    }
                 }
                 .tag(Tab.test)
                 
-                ExamView()
+                AnswerNoteView()
                 .tabItem {
-                    Image(
-                       homeViewMoodel.selectedTab == .conceptBook
-                       ? "Frame 39"
-                       : "Frame 40"
-                    )
+                    VStack{
+                        Image(
+                            homeViewMoodel.selectedTab == .conceptBook
+                            ? "tab_ox_on"
+                            : "tab_ox_off"
+                        )
+                        Text("오답노트")
+                    }
                 }
                 .tag(Tab.conceptBook)
                 
                 MyPageView()
                 .tabItem {
-                    Image(
-                        homeViewMoodel.selectedTab == .myPage
-                        ? "Frame 39"
-                        : "Frame 40"
-                    )
+                    VStack{
+                        Image(
+                            homeViewMoodel.selectedTab == .myPage
+                            ? "tab_mypage_on"
+                            : "tab_mypage_off"
+                        )
+                        Text("마이")
+                    }
                 }
                 .tag(Tab.myPage)
             }
             .environmentObject(homeViewMoodel)
-            
+            .navigationBarBackButtonHidden()
             SeperatorListView()
         }
     }
 }
-//MARK: -구분서
+//MARK: -구분선
 private struct SeperatorListView: View {
     fileprivate var body: some View {
         VStack {
@@ -77,7 +89,7 @@ private struct SeperatorListView: View {
                   )
                 )
                 .frame(height: 10)
-                .padding(.bottom, 60)
+                .padding(.bottom, 50)
         }
     }
 }
