@@ -11,45 +11,54 @@ struct FindIdView: View {
     @EnvironmentObject var pathModel: PathModel
     @StateObject var findIdViewModel = FindIdViewModel()
     @State private var showEmailSentAlert = false
+    @StateObject private var keyboardResponder = KeyboardResponder()
     
     var body: some View {
-        VStack{
-
-            CustomNavigationBar(
-                isDisplayLeftBtn: true,
-                isDisplayRightBtn: false,
-                isCenterTitle: true,
-                leftBtnAction: {
-                    pathModel.paths.removeLast()
-                },
-                centerTitleType: .id
-            )
-            
-            IdTitleView()
-            
-            IdEmailView(email: $findIdViewModel.email, errorMessage: findIdViewModel.errorMessage)
-                .onChange(of: findIdViewModel.email) { _ in
-                    findIdViewModel.validateEmail()
-                }
-            
-            SendEmailButton(onSuccess: {
-                showEmailSentAlert = true
-            })
-        }
-        .overlay(
-            showEmailSentAlert ? AnyView(
-                CustomSendEmailView(
-                    title: "이메일 발송 완료!",
-                    subtitle: "입력해주신 이메일 주소로 아이디가 발송되었\n습니다. 메일함을 확인해주세요.",
-                    onDismiss: {
-                        showEmailSentAlert = false
-                    }
+        ZStack {
+            Color.customBackground.edgesIgnoringSafeArea(.all)
+            VStack {
+                CustomNavigationBar(
+                    isDisplayLeftBtn: true,
+                    isDisplayRightBtn: false,
+                    isCenterTitle: true,
+                    leftBtnAction: {
+                        pathModel.paths.removeLast()
+                    },
+                    centerTitleType: .id
                 )
-            ) : AnyView(EmptyView())
-        )
+                
+                IdTitleView()
+                
+                IdEmailView(email: $findIdViewModel.email, errorMessage: findIdViewModel.errorMessage)
+                    .onChange(of: findIdViewModel.email) { _ in
+                        findIdViewModel.validateEmail()
+                    }
+                
+                Spacer()
+                
+                SendEmailButton(onSuccess: {
+                    showEmailSentAlert = true
+                })
+                .padding(.bottom, keyboardResponder.currentHeight == 0 ? 20 : keyboardResponder.currentHeight)
+            }
+            .overlay(
+                showEmailSentAlert ? AnyView(
+                    CustomSendEmailView(
+                        title: "이메일 발송 완료!",
+                        subtitle: "입력해주신 이메일 주소로 아이디가 발송되었\n습니다. 메일함을 확인해주세요.",
+                        onDismiss: {
+                            showEmailSentAlert = false
+                        }
+                    )
+                ) : AnyView(EmptyView())
+            )
+            .animation(.easeOut(duration: 0.16))
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
     }
 }
-
 // MARK: IDTitleView
 struct IdTitleView: View {
     var body: some View {
@@ -84,7 +93,8 @@ private struct IdEmailView: View {
                 .padding(.bottom, 5)
             TextField("예) Qriz@test.com", text: $email)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
 
             if let errorMessage = errorMessage {
@@ -93,6 +103,7 @@ private struct IdEmailView: View {
                     .font(.caption)
                     .padding(.top, 5)
             }
+            
         }
         .padding()
     }

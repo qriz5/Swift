@@ -6,6 +6,8 @@ struct SignUpView: View {
     @State private var currentStep: SignUpStep = .name
     
     var body: some View {
+        ZStack {
+            Color.customBackground.edgesIgnoringSafeArea(.all)
             VStack(spacing: 20) {
                 
                 CustomNavigationBar(
@@ -32,12 +34,13 @@ struct SignUpView: View {
                         SignIdView(signUpViewModel: SignUpViewModel(), nextStep: { currentStep = .password }, previousStep: { currentStep = .email })
                     case .password:
                         SignPwdView(signUpViewModel: SignUpViewModel(), nextStep: { print("All steps completed") }, previousStep: { currentStep = .id })
-
+                        
                     }
                 }
             }
             .padding()
         }
+    }
 }
 
 // MARK: - 타이트 뷰
@@ -69,14 +72,15 @@ struct SignNameView: View {
             
             Spacer().frame(height: 5)
             
-            Text("이름")
-                .font(.headline)
+//            Text("이름")
+//                .font(.headline)
             
             Spacer().frame(height: 1)
             
             TextField("이름을 입력해 주세요", text: $signUpViewModel.name)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
             
             if signUpViewModel.showNameError {
@@ -90,10 +94,10 @@ struct SignNameView: View {
             Button(action: nextStep) {
                 Text("다음")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.customSignTk)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray)
+                    .background(Color.customSignBg)
                     .cornerRadius(5.0)
             }
 
@@ -127,7 +131,8 @@ struct SignEmailView: View {
             HStack {
                 TextField("이메일을 입력해 주세요", text: $signUpViewModel.email)
                     .padding()
-                    .background(Color.gray.opacity(0.1))
+                    .foregroundColor(Color.customSignTfTk)
+                    .background(Color.customSignTfBg)
                     .cornerRadius(5.0)
                 
                 Button(action: {
@@ -146,7 +151,8 @@ struct SignEmailView: View {
             
             TextField("인증번호 4자리 입력", text: $signUpViewModel.confirmPassword)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
             
             Spacer()
@@ -155,20 +161,20 @@ struct SignEmailView: View {
                 Button(action: previousStep) {
                     Text("이전")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
                 
                 Button(action: nextStep) {
                     Text("다음")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
             }
@@ -196,7 +202,8 @@ struct SignIdView: View {
             HStack {
                 TextField("아이디를 입력해 주세요", text: $signUpViewModel.userId)
                     .padding()
-                    .background(Color.gray.opacity(0.1))
+                    .foregroundColor(Color.customSignTfTk)
+                    .background(Color.customSignTfBg)
                     .cornerRadius(5.0)
                 
                 Button(action: {
@@ -207,9 +214,13 @@ struct SignIdView: View {
                         .padding(.horizontal, 10)
                         .padding(.vertical, 10)
                         .frame(width: 100, height: 50)
-                        .background(Color.gray)
-                        .foregroundColor(.white)
+                        .background(Color.customBackground)
+                        .foregroundColor(Color.custommainDayTC_on)
                         .cornerRadius(5.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .stroke(Color.custommainDayTC_on, lineWidth: 2)
+                        )
                 }
             }
             
@@ -219,20 +230,20 @@ struct SignIdView: View {
                 Button(action: previousStep) {
                     Text("이전")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
                 
                 Button(action: nextStep) {
                     Text("다음")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
             }
@@ -258,12 +269,14 @@ struct SignPwdView: View {
             
             SecureField("비밀번호를 입력해 주세요", text: $signUpViewModel.password)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
             
             SecureField("비밀번호를 확인해 주세요", text: $signUpViewModel.confirmPassword)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
             
             Spacer()
@@ -272,20 +285,20 @@ struct SignPwdView: View {
                 Button(action: previousStep) {
                     Text("이전")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
                 
                 Button(action: nextStep) {
                     Text("가입하기")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
             }

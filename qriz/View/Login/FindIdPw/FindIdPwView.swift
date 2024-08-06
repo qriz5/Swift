@@ -86,7 +86,6 @@ struct FindIdView_sub: View {
                 }
             }
 
-            // 인증 코드 입력 필드
             TextField("인증 코드를 입력해 주세요.", text: $findIdPwViewModel.verificationCode)
                 .padding()
                 .background(Color.gray.opacity(0.1))

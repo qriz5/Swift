@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct qrizApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var container: DIContainer = .init(services: Services())
+    
+    
     var body: some Scene {
         WindowGroup {
-            Qriz()
+//            ExamView()
+            AuthenticatedView(authViewModel: .init(container: container))
+//            LoginView()
+//                .environmentObject(PathModel())
         }
     }
 }

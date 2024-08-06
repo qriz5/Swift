@@ -10,46 +10,48 @@ import SwiftUI
 struct FindPwView: View {
     @EnvironmentObject var pathModel: PathModel
     @StateObject var findPwViewModel = FindPwViewModel()
-//    @State private var isButtonClicked = false
+    //    @State private var isButtonClicked = false
     @State private var showEmailSentAlert = false
     
     var body: some View {
-        VStack{
-            
-            CustomNavigationBar(
-                isDisplayLeftBtn: true,
-                isDisplayRightBtn: false,
-                isCenterTitle: true,
-                leftBtnAction: {
-                    pathModel.paths.removeLast()
-                },
-                centerTitleType: .pw
-            )
-            
-            PwTitleView()
-            
-            IdEmailView(email: $findPwViewModel.email, errorMessage: findPwViewModel.errorMessage)
-                .onChange(of: findPwViewModel.email) { _ in
-                    findPwViewModel.validateEmail()
-                }
-            SendEmailButton(onSuccess: {
-                showEmailSentAlert = true
-            })
-        }
-        .overlay(
-            showEmailSentAlert ? AnyView(
-                CustomSendEmailView(
-                    title: "이메일 발송 완료!",
-                    subtitle: "입력해주신 이메일 주소로 아이디가 발송되었\n습니다. 메일함을 확인해주세요.",
-                    onDismiss: {
-                        showEmailSentAlert = false
-                    }
+        ZStack {
+            Color.customBackground.edgesIgnoringSafeArea(.all)
+            VStack{
+                
+                CustomNavigationBar(
+                    isDisplayLeftBtn: true,
+                    isDisplayRightBtn: false,
+                    isCenterTitle: true,
+                    leftBtnAction: {
+                        pathModel.paths.removeLast()
+                    },
+                    centerTitleType: .pw
                 )
-            ) : AnyView(EmptyView())
-        )
+                
+                PwTitleView()
+                
+                IdEmailView(email: $findPwViewModel.email, errorMessage: findPwViewModel.errorMessage)
+                    .onChange(of: findPwViewModel.email) { _ in
+                        findPwViewModel.validateEmail()
+                    }
+                SendEmailButton(onSuccess: {
+                    showEmailSentAlert = true
+                })
+            }
+            .overlay(
+                showEmailSentAlert ? AnyView(
+                    CustomSendEmailView(
+                        title: "이메일 발송 완료!",
+                        subtitle: "입력해주신 이메일 주소로 아이디가 발송되었\n습니다. 메일함을 확인해주세요.",
+                        onDismiss: {
+                            showEmailSentAlert = false
+                        }
+                    )
+                ) : AnyView(EmptyView())
+            )
+        }
     }
 }
-
 // MARK: IDTitleView
 struct PwTitleView: View {
     var body: some View {
@@ -84,7 +86,8 @@ private struct IdEmailView: View {
                 .padding(.bottom, 5)
             TextField("예) Qriz@test.com", text: $email)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
             if let errorMessage = errorMessage {
                 Text(errorMessage)

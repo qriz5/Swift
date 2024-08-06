@@ -14,16 +14,8 @@ struct ChangePwView: View {
     
     var body: some View {
         ZStack {
+            Color.customBackground.edgesIgnoringSafeArea(.all)
             VStack {
-                CustomNavigationBar(
-                    isDisplayLeftBtn: true,
-                    isDisplayRightBtn: false,
-                    isCenterTitle: true,
-                    leftBtnAction: {
-                        pathModel.paths.removeLast()
-                    },
-                    centerTitleType: .chpw
-                )
                 
                 Spacer().frame(height: 20)
                 
@@ -43,6 +35,12 @@ struct ChangePwView: View {
                 }
             }
             .padding()
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButton()
+                }
+            }
             
             if showEmailSentAlert {
                 CustomSendEmailView(
@@ -65,15 +63,15 @@ struct ChangePwTitleView: View {
         HStack{
             VStack(alignment: .leading, spacing: 5) {
             
-                Text("비밀번호를 잊으셨나요?")
+                Text("소중한 정보를 보호하기위헤\n새로운 비밀번호로 변경해 주세요.?")
                     .foregroundColor(.black)
-                    .font(.system(size: 25, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                 
                 Spacer().frame(height: 10)
                 
-                Text("기존에 가입할 때 사용한 이메일을 입력하시면\n비밀번호 변경 메일을 전송해드립니다.")
+                Text("이전에 사용한 적 없는 비밀번호가 안전합니다.")
                     .foregroundColor(.gray)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
             }
             .padding()
             
@@ -88,18 +86,26 @@ struct ChangePwTextFieldView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("새 비밀번호")
-                .font(.headline)
-                .fontWeight(.bold)
-                .padding(.bottom, 5)
-            SecureField("새 비밀번호를 입력하세요", text: $changePwViewModel.newPassword)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(5.0)
 
-            SecureField("비밀번호를 다시 입력하세요", text: $changePwViewModel.confirmPassword)
+            SecureField("현재 비밀번호", text: $changePwViewModel.newPassword)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
+                .cornerRadius(5.0)
+            SecureField("새 비밀번호", text: $changePwViewModel.newPassword)
+                .padding()
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
+                .cornerRadius(5.0)
+            Text("새 비밀번호를 입력해주세요(영문,숫자,특수문자8~20자)")
+                .font(.system(size: 11))
+                .foregroundColor(Color.customSignTc)
+                .padding(.top,5)
+                .padding(.bottom,5)
+            SecureField("새 비밀번호 확인", text: $changePwViewModel.confirmPassword)
+                .padding()
+                .foregroundColor(Color.customSignTfTk)
+                .background(Color.customSignTfBg)
                 .cornerRadius(5.0)
 
             if let errorMessage = changePwViewModel.errorMessage {
@@ -122,10 +128,10 @@ struct ChangePwOkButtonView: View {
             onConfirm()
         }) {
             Text("확인")
-                .foregroundColor(.white)
+                .foregroundColor(Color.customSignTk)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.gray)
+                .background(Color.customSignBg)
                 .cornerRadius(10)
         }
         .padding([.leading, .trailing, .bottom])
