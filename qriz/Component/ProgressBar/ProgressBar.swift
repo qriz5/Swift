@@ -17,7 +17,7 @@ struct ProgressBar: View {
             HStack(spacing: 0) {
                 ForEach(steps.indices, id: \.self) { index in
                     Rectangle()
-                        .fill(index <= steps.firstIndex(of: currentStep) ?? 0 ? Color.gray.opacity(0.5): Color.gray.opacity(0.1))
+                        .fill(index <= steps.firstIndex(of: currentStep) ?? 0 ? Color.customProgressBarOn: Color.customProgressBarOff)
                         .frame(width: geometry.size.width / CGFloat(steps.count))
                 }
             }
@@ -35,11 +35,11 @@ struct ExamProgressBar: View {
         ZStack(alignment: .leading) {
             Capsule()
                 .frame(height: 8)
-                .foregroundColor(Color.gray.opacity(0.2))
+                .foregroundColor(Color.customProgressBarOff)
             
             Capsule()
                 .frame(width: CGFloat(value) * UIScreen.main.bounds.width , height: 4)
-                .foregroundColor(Color.gray.opacity(0.8))
+                .foregroundColor(Color.customProgressBarOn)
                 .animation(.linear, value: value)
         }
     }
