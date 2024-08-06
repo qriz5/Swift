@@ -19,5 +19,6 @@ enum NavigationTitleType: String {
     case dailytest = "오늘의 테스트"
     case examresult = "시험결과"
     case concept = "개념서"
-    case reviewnote = "정오답노트"
+    case reviewnote = "오답노트"
+    case chpw = "비밀번호 변경"
 }
