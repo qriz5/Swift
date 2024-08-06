@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SendEmailButton: View {
+    var onSuccess: () -> Void
+    
     var body: some View {
                 Spacer()
         
                 Button(action: {
                     // 이메일 발송
-        
+                    onSuccess()
                     print("이메일 발송 버튼 클릭됨")
                 }) {
                     Text("이메일 발송")
@@ -28,8 +30,4 @@ struct SendEmailButton: View {
                 
                 Spacer().frame(height: 10)
     }
-}
-
-#Preview {
-    SendEmailButton()
 }
