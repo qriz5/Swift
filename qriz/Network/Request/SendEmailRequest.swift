@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct SendEmailRequest: Codable {
+    let email: String
+}

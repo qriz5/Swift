@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct SurveyRequest: Codable {
+    let keyConcepts: [String]
+}

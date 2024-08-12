@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+// MARK: - FindIdRequest
+struct FindIdRequest: Codable {
+    var nickname: String
+    var email: String
+}
+

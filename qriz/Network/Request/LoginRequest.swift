@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+// MARK: - LoginRequest
+struct LoginRequest: Codable {
+    var username: String  // 사용자 아이디
+    var password: String  // 비밀번호
+}
+

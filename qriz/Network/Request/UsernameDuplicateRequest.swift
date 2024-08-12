@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct UsernameDuplicateRequest: Codable {
+    let username: String
+}

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct EmailAuthenticationRequest: Codable {
+    let code: String
+}

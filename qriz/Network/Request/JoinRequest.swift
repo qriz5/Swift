@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct JoinRequest: Codable {
+    let username: String
+    let password: String
+    let nickname: String
+    let email: String
+}

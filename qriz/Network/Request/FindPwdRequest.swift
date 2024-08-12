@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - FindPwdRequest
+struct FindPwdRequest: Codable {
+    var username: String
+    var email: String
+}
