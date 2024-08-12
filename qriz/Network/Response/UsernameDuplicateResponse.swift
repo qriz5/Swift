@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct UsernameDuplicateResponse: Codable {
+    let code: Int
+    let msg: String
+    let data: UsernameDuplicateData
+}
+
+struct UsernameDuplicateData: Codable {
+    let available: Bool
+}

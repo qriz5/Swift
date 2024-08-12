@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+struct ApplyListResponse: Codable {
+    let code: Int
+    let msg: String
+    let data: [ApplyItem]
+    
+    struct ApplyItem: Codable {
+        let apply_id: Int
+        let period: String
+        let date: String
+        let test_time: String
+    }
+}

@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+// MARK: - FindIdResponse
+struct FindIdResponse: Codable {
+    var code: Int
+    var msg: String
+    var data: FindIdData
+}
+
+// MARK: - FindIdData
+struct FindIdData: Codable {
+    var username: String
+    var date: Date
+}
+

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct JoinResponse: Codable {
+    let code: Int
+    let msg: String
+    let data: UserData
+}
