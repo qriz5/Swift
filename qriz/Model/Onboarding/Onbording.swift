@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct SelectableBox: Hashable, Identifiable {
-    var id = UUID() 
-    var title: String
+struct SelectableBox: Identifiable, Hashable {
+    let id = UUID()
+    let title: String
     var isSelected: Bool = false
+    
+    static func == (lhs: SelectableBox, rhs: SelectableBox) -> Bool {
+        return lhs.id == rhs.id
+    }
 
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
