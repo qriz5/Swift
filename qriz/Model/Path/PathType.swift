@@ -13,12 +13,13 @@ enum PathType: Hashable {
 
 //회원가입 화면
 enum SignUpStep {
-    case name, email, id, password
+    case name, email,emailok, id, password
     
     func next() -> SignUpStep {
         switch self {
         case .name: return .email
-        case .email: return .id
+        case .email: return .emailok
+        case .emailok: return .id
         case .id: return .password
         case .password: return .name
         }
@@ -28,7 +29,8 @@ enum SignUpStep {
         switch self {
         case .name: return .name
         case .email: return .name
-        case .id: return .email
+        case .emailok: return .email
+        case .id: return .emailok
         case .password: return .id
         }
     }
