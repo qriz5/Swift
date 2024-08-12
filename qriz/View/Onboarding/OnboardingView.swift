@@ -1,10 +1,18 @@
+//
+//  OnboardingView.swift
+//  qriz
+//
+//  Created by mimi_0_0 on 2024/05/27.
+//
+
+
 import SwiftUI
 
 struct OnboardingFlowView: View {
     @State private var currentStep: Int = 0
 
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             VStack {
                 if currentStep == 0 {
                     IntroView(currentStep: $currentStep)
@@ -22,15 +30,16 @@ struct OnboardingFlowView: View {
 // MARK: 온보딩뷰
 struct OnboardingView: View {
     @Binding var currentStep: Int
+    @StateObject private var selectBoxViewModel = SelectBoxViewModel()
 
     var body: some View {
         VStack {
             Spacer().frame(height: 50)
             OnboardingTitleView()
             Spacer().frame(height: 25)
-            SelectBoxView()
+            SelectBoxView(selectBoxViewModel: selectBoxViewModel)
             Spacer()
-            selectedButtonView(currentStep: $currentStep)
+            selectedButtonView(currentStep: $currentStep, selectBoxViewModel: selectBoxViewModel)
         }
         .background(Color.customBackground)
     }
@@ -38,8 +47,6 @@ struct OnboardingView: View {
 
 // MARK: -OnboardingView 타이틀 뷰
 private struct OnboardingTitleView: View {
-    @EnvironmentObject private var onboardingViewModel: OnboardingViewModel
-
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
@@ -62,7 +69,7 @@ private struct OnboardingTitleView: View {
 
 // MARK: -select Box 뷰
 struct SelectBoxView: View {
-    @StateObject private var selectBoxViewModel = SelectBoxViewModel()
+    @ObservedObject var selectBoxViewModel: SelectBoxViewModel
 
     var body: some View {
         ScrollView(.vertical) {
@@ -117,12 +124,12 @@ struct SelectableBoxView: View {
 // MARK: -Button 뷰
 struct selectedButtonView: View {
     @Binding var currentStep: Int
-    @StateObject private var selectBoxViewModel = SelectBoxViewModel()
+    @ObservedObject var selectBoxViewModel: SelectBoxViewModel
 
     var body: some View {
         Button(action: {
-            print("선택완료 버튼 클릭됨")
-            selectBoxViewModel.sendSelectedItemsToAPI()
+            print(selectBoxViewModel.selectedItems)
+            selectBoxViewModel.submitSurvey()
             currentStep += 1
         }) {
             Text("선택완료")

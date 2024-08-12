@@ -11,10 +11,10 @@ struct MainPageView: View {
     @StateObject private var homeViewModel = HomeViewModel()
 
     var body: some View {
-        NavigationStack {
-            ZStack {
+        
+        ZStack {
                 Color.customBackground.edgesIgnoringSafeArea(.all)
-
+            NavigationStack {
                 ScrollView {
                     VStack {
                         ExamMainLogoView()
@@ -350,65 +350,122 @@ struct DailyStudyButtonView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
 
     var body: some View {
-        Button(action: {
-            homeViewModel.changeSelectedTab(.test) // ConceptBook 탭으로 전환
-        }) {
-            Text("학습하러 가기")
-                .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
+        NavigationLink(destination: TestDailyView()) {
+            VStack{
+                Text("학습하러 가기")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
+            }
+            .frame(height: 60)
+            .background(Color.customButton)
+            .cornerRadius(10)
+            .padding(.horizontal)
         }
-        .frame(height: 60)
-        .background(Color.customButton)
-        .cornerRadius(10)
-        .padding(.horizontal)
+        
+        
+//        Button(action: {
+//            homeViewModel.changeSelectedTab(.test) // ConceptBook 탭으로 전환
+//        }) {
+//            Text("학습하러 가기")
+//                .font(.system(size: 18, weight: .bold))
+//                .foregroundColor(.white)
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .padding()
+//        }
+//        .frame(height: 60)
+//        .background(Color.customButton)
+//        .cornerRadius(10)
+//        .padding(.horizontal)
     }
 }
 
 // MARK:  모의고사  버튼
 struct ReviewTestExamButtonView: View {
     var body: some View {
-        NavigationLink(destination: ExamView()) {
             VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("모의고사 응시")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.black)
+                NavigationLink(destination: ExamView()) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("모의고사 응시")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+                            
+                            Spacer().frame(height: 10)
+                            
+                            Text("실전처럼 준비하기")
+                                .font(.system(size: 14))
+                                .foregroundColor(.black)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
                         
-                        Spacer().frame(height: 10)
-                        
-                        Text("실전처럼 준비하기")
-                            .font(.system(size: 14))
-                            .foregroundColor(.black)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Image("Group")
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Image("Group")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                            }
+                            Image("Vector")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40, height: 40)
+                                .frame(width: 140, height: 20)
                         }
-                        Image("Vector")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 140, height: 20)
+                        .padding()
                     }
-                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .frame(height: 80)
+                    .padding(.horizontal)
+                    .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
                 }
-                .background(Color.white)
-                .cornerRadius(10)
-                .frame(height: 80)
-                .padding(.horizontal)
-                .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
+//                HStack(spacing: 16) {
+//                    NavigationLink(destination: ExamView()) {
+//                        VStack(alignment: .leading) {
+//                            Text("모의고사 응시")
+//                                .font(.system(size: 18, weight: .bold))
+//                                .foregroundColor(.black)
+//                            
+//                            Spacer().frame(height: 10)
+//                            
+//                            Text("실전처럼 준비하기")
+//                                .font(.system(size: 14))
+//                                .foregroundColor(.black)
+//                        }
+//                        .frame(height: 106)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                        .padding()
+//                        .background(Color.white)
+//                        .cornerRadius(8)
+//                        .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
+//                    }
+//                    NavigationLink(destination: TestDailyView()) {
+//                        VStack(alignment: .leading) {
+//                            Text("테스트 모아보기")
+//                                .font(.system(size: 18, weight: .bold))
+//                                .foregroundColor(.black)
+//                            
+//                            Spacer().frame(height: 10)
+//                            
+//                            Text("테스트 유형 선택하기")
+//                                .font(.system(size: 14))
+//                                .foregroundColor(.black)
+//                        }
+//                        .frame(height: 106)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                        .padding()
+//                        .background(Color.white)
+//                        .cornerRadius(8)
+//                        .shadow(color: .black.opacity(0.1), radius: 10, x: 5, y: 5)
+//                    }
+//                }
+//                .padding(.horizontal, 16)
+
             }
         }
-    }
 }
 
 
