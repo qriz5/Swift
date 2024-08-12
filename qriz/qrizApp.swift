@@ -15,8 +15,9 @@ struct qrizApp: App {
     
     var body: some Scene {
         WindowGroup {
+            HomeView()
 //            ExamView()
-            AuthenticatedView(authViewModel: .init(container: container))
+//            AuthenticatedView(authViewModel: .init(container: container))
 //            LoginView()
 //                .environmentObject(PathModel())
         }

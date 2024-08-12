@@ -81,10 +81,21 @@ extension AuthenticationService {
             }
             
             let firebaseUser = result.user
-            let user: User = .init(id: firebaseUser.uid,
-                                   name: firebaseUser.displayName ?? "",
-                                   phoneNumber: firebaseUser.phoneNumber,
-                                   profileURL: firebaseUser.photoURL?.absoluteString)
+            let user: User = .init(
+                userId: firebaseUser.uid,
+                username: firebaseUser.displayName ?? "",
+                password: "", // 비밀번호는 클라이언트에서 직접 사용할 수 없음
+                email: firebaseUser.email ?? "",
+                role: .customer, // 기본값 설정
+                provider: "Google",
+                providerId: firebaseUser.providerID,
+                createdAt: firebaseUser.metadata.creationDate ?? Date(),
+                updatedAt: firebaseUser.metadata.lastSignInDate ?? Date()
+            )
+//            let user: User = .init(id: firebaseUser.uid,
+//                                   name: firebaseUser.displayName ?? "",
+//                                   email: firebaseUser.email,
+//                                   profileURL: firebaseUser.photoURL?.absoluteString)
             
             completion(.success(user))
         }

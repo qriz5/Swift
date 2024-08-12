@@ -12,12 +12,11 @@ struct AuthenticatedView: View {
     @EnvironmentObject var pathModel: PathModel
     
     var body: some View {
-        switch authViewModel.authenticationState {
-        case .unauthenticated:
+        if authViewModel.authenticationState == .unauthenticated {
             LoginView()
                 .environmentObject(PathModel())
                 .environmentObject(authViewModel)
-        case .authenticated:
+        } else if authViewModel.authenticationState == .authenticated {
             HomeView()
         }
     }
