@@ -18,16 +18,6 @@ struct FindPwView: View {
             Color.customBackground.edgesIgnoringSafeArea(.all)
             VStack{
                 
-                CustomNavigationBar(
-                    isDisplayLeftBtn: true,
-                    isDisplayRightBtn: false,
-                    isCenterTitle: true,
-                    leftBtnAction: {
-                        pathModel.paths.removeLast()
-                    },
-                    centerTitleType: .pw
-                )
-                
                 PwTitleView()
                 
                 IdEmailView(email: $findPwViewModel.email, errorMessage: findPwViewModel.errorMessage)
@@ -49,6 +39,13 @@ struct FindPwView: View {
                     )
                 ) : AnyView(EmptyView())
             )
+            .navigationTitle("아이디 찾기")
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButton()
+                }
+            }
         }
     }
 }

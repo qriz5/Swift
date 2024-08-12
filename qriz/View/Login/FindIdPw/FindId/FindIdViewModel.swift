@@ -6,26 +6,42 @@
 //
 
 import Foundation
+import Combine
 
 class FindIdViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var errorMessage: String?
     @Published var isEmailSent: Bool = false
     @Published var emailSendError: String?
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let apiService = APIService()
 
     func sendEmail() {
-        // 이메일 발송 로직을 여기에 구현합니다.
-        if isValidEmail(email) {
-            // 이메일 발송 성공 시
-            isEmailSent = true
-            emailSendError = nil
-        } else {
-            // 이메일 발송 실패 시
-            isEmailSent = false
-            emailSendError = "이메일 발송에 실패했습니다. 다시 시도해 주세요."
-        }
+        validateEmail()
+        
+        guard errorMessage == nil, !email.isEmpty else { return }
+
+        apiService.findUsername(nickname: "sampleNickname", email: email)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self?.isEmailSent = false
+                    self?.emailSendError = "이메일 발송에 실패했습니다. 다시 시도해 주세요."
+                    print("Error sending email: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] response in
+                self?.isEmailSent = true
+                self?.emailSendError = nil
+                self?.errorMessage = nil
+                print("Username sent: \(response.data.username)")
+            })
+            .store(in: &cancellables)
     }
-    
+
     func validateEmail() {
         if email.isEmpty {
             errorMessage = "이메일을 입력해주세요."

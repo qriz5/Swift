@@ -17,15 +17,6 @@ struct FindIdView: View {
         ZStack {
             Color.customBackground.edgesIgnoringSafeArea(.all)
             VStack {
-                CustomNavigationBar(
-                    isDisplayLeftBtn: true,
-                    isDisplayRightBtn: false,
-                    isCenterTitle: true,
-                    leftBtnAction: {
-                        pathModel.paths.removeLast()
-                    },
-                    centerTitleType: .id
-                )
                 
                 IdTitleView()
                 
@@ -55,6 +46,13 @@ struct FindIdView: View {
             .animation(.easeOut(duration: 0.16))
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+            .navigationTitle("아이디 찾기")
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButton()
+                }
             }
         }
     }
