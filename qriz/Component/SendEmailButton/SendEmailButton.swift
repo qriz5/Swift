@@ -20,10 +20,10 @@ struct SendEmailButton: View {
                 }) {
                     Text("이메일 발송")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.customSignTk)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray)
+                        .background(Color.customSignBg)
                         .cornerRadius(5.0)
                 }
                 .padding(.horizontal)
