@@ -1,5 +1,5 @@
 //
-//  UserObject.swift
+//  DTOInformatoin.swift
 //  qriz
 //
 //  Created by mimi_0_0 on 2024/07/16.
