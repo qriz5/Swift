@@ -21,7 +21,7 @@ struct MainPageView: View {
                         ExamScheduleView(mainPageViewModel: MainPageViewModel())
                         Spacer().frame(height: 30)
                         ReviewTestExamButtonView()
-                        Spacer().frame(height: 40)
+                        Spacer().frame(height: 41)
                         DailyScheduleView()
                         Spacer()
                     }
